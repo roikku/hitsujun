@@ -1,0 +1,25 @@
+
+# Mac Specific File #
+.DS_Store
+*/.DS_Store
+
+# Eclipse Files #
+.classpath
+.project
+.settings
+*/.classpath
+*/.poject
+*/settings
+
+# Target Folder #
+target/
+*/target/*
+
+# Class Files #
+*.class
+
+# Package Files #
+*.jar
+*.war
+*.ear
+

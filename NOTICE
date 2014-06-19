@@ -1,0 +1,39 @@
+Histujun
+Copyright 2014 Loic Merckel
+
+This application incorporates some works from the SVG Android project (http://code.google.com/p/svg-android/), which is covered by the Apache v2 license.
+
+It also uses some code from the PlayN Sample Projects (http://code.google.com/p/playn/), which is distributed under the Apache v2 license.
+
+It includes as well some code from the Atlantis project (https://github.com/threerings/atlantis). 
+
+This notice results from the concatenation of the SVG Android project's notice and these few paragraphes concerning Hitsujun.   
+
+---
+
+SVG Android
+Copyright 2011 Larva Labs LLC and Google, Inc.
+
+This product includes software developed at
+The Apache Software Foundation (http://www.apache.org/).
+
+---
+
+Apache Batik
+Copyright 1999-2007 The Apache Software Foundation
+
+This product includes software developed at
+The Apache Software Foundation (http://www.apache.org/).
+
+This software contains code from the World Wide Web Consortium (W3C) for the
+Document Object Model API (DOM API) and SVG Document Type Definition (DTD).
+
+This software contains code from the International Organisation for
+Standardization for the definition of character entities used in the software's
+documentation.
+
+This product includes images from the Tango Desktop Project
+(http://tango.freedesktop.org/).
+
+This product includes images from the Pasodoble Icon Theme
+(http://www.jesusda.com/projects/pasodoble).
