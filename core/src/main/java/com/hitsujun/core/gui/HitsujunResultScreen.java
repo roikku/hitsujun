@@ -85,16 +85,16 @@ public class HitsujunResultScreen extends HitsujunScreen {
 				.inset(5)));
 		layer.add(root.layer);
 		
-        Font font = PlayN.graphics().createFont("Helvetica", Font.Style.PLAIN, 32);
+        Font font = PlayN.graphics().createFont("Helvetica", Font.Style.PLAIN, UiUtils.scaleSize (32));
         Styles tstyles = Styles.make(Style.FONT.is(font),
                                      Style.TEXT_EFFECT.is(Style.TextEffect.GRADIENT), Style.COLOR.is(HitsujunColorConstants.FONT_TITLE_COLOR));
 
-        Font valueFont = PlayN.graphics().createFont("Helvetica", Font.Style.PLAIN, 24);
+        Font valueFont = PlayN.graphics().createFont("Helvetica", Font.Style.PLAIN, UiUtils.scaleSize (24));
         Styles valueStyles = Styles.make(Style.FONT.is(valueFont),
                                      Style.TEXT_EFFECT.is(Style.TextEffect.NONE), 
                                      Style.COLOR.is(Color.rgb(240, 10, 10)));
         
-        Font keyFont = PlayN.graphics().createFont("Helvetica", Font.Style.PLAIN, 20);
+        Font keyFont = PlayN.graphics().createFont("Helvetica", Font.Style.PLAIN, UiUtils.scaleSize (20));
         Styles keyStyle = Styles.make(Style.FONT.is(keyFont),
                 Style.TEXT_EFFECT.is(Style.TextEffect.NONE), 
                 Style.COLOR.is(Color.rgb(90, 90, 90)));
@@ -112,7 +112,8 @@ public class HitsujunResultScreen extends HitsujunScreen {
 		UiUtils.addToTableGroup (tableBasicInfo, "Score", keyStyle, String.valueOf(score), valueStyles) ;
 		UiUtils.addToTableGroup (tableBasicInfo, "Achieved", keyStyle, String.valueOf(Math.floor(percentageAchieved * 100f) / 100f) + " %", valueStyles) ;
 		
-		Button button = new Button("Main Menu");
+		//Button button = new Button("Main Menu");
+		Button button = UiUtils.getButton("Main Menu");
 		buttons.add(button);
 		button.clicked().connect(new UnitSlot() {
 			@Override

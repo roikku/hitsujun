@@ -142,6 +142,9 @@ public class HitsujunGameController  extends HitsujunController implements HasAc
 	
 	public void init() {
 		
+		if (game.isPlaying())
+			game.giveUp();
+		
 		// create the menu
 		view.createMenu(new MenuCallback (){
 

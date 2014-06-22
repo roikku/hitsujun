@@ -203,8 +203,12 @@ public class KanjiView {
 	}
 	
 	
-	public void setGroupLayer ( GroupLayer kanjiLayer)
+	public void setGroupLayer (GroupLayer kanjiLayer)
 	{		
+		if (kanjiLayer == null)
+			return ;
+		kanjiLayer.destroyAll() ;
+
 		// the background canvas must be created before the "working" canvas
 		bgCanvas = createCanvas (kanjiLayer, kanji.getX(), kanji.getY(), kanji.getWidth(), kanji.getHeight()) ;
 		canvas = createCanvas (kanjiLayer, kanji.getX(), kanji.getY(), kanji.getWidth(), kanji.getHeight()) ;

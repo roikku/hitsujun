@@ -74,11 +74,13 @@ public class HitsujunMenuScreen extends HitsujunScreen {
 				.inset(5)));
 		layer.add(root.layer);
 		
-        Font titleFont = PlayN.graphics().createFont("Helvetica", Font.Style.BOLD, 36);
+        Font titleFont = PlayN.graphics().createFont("Helvetica", Font.Style.BOLD, UiUtils.scaleSize (36));
         Styles tstyles = Styles.make(Style.FONT.is(titleFont),
                                      Style.TEXT_EFFECT.is(Style.TextEffect.GRADIENT), 
                                      Style.COLOR.is(HitsujunColorConstants.FONT_TITLE_COLOR));
 
+        Font labelFont = PlayN.graphics().createFont("Helvetica", Font.Style.PLAIN, UiUtils.scaleSize (16));
+        Styles labelStyle = Styles.make(Style.FONT.is(labelFont));
         
         root.add(new Shim(1,1).setConstraint(AxisLayout.stretched(0.5f))) ;
         
@@ -86,11 +88,12 @@ public class HitsujunMenuScreen extends HitsujunScreen {
 		root.add(/*new Label("UNDER CONSTRUCTION"),*/
 				new Label("hitsujun").setStyles(tstyles), 
 				buttons = new Group(AxisLayout.vertical().offStretch()), 
-				new Label("ESC/BACK key or two-finger tap returns to menu from game"));
+				new Label("ESC/BACK key or two-finger tap returns to menu from game").addStyles(labelStyle));
 
 		int key = 1;
 		for (int i = 0 ; i < HitsujunGame.NUMBER_OF_LEVEL ; ++i) {
-			Button button = new Button("Level " + key++);
+			//Button button = new Button("Level " + key++);
+			Button button = UiUtils.getButton("Level " + key++) ;
 			buttons.add(button);
 			final int screenLevel = i ;
 			button.clicked().connect(new UnitSlot() {
@@ -125,7 +128,11 @@ public class HitsujunMenuScreen extends HitsujunScreen {
     
 	private Button getLinkButton ()
 	{
+	    Font buttonFont = PlayN.graphics().createFont("Helvetica", Font.Style.PLAIN, UiUtils.scaleSize (16));
+	    Styles buttonStyle = Styles.make(Style.FONT.is(buttonFont));
+	    
 		Button buttonKanjiInfo = new Button("www.hitsujun.org");
+		buttonKanjiInfo.addStyles(buttonStyle) ;
 		buttonKanjiInfo.clicked().connect(new UnitSlot() {
 			@Override
 			public void onEmit() {

@@ -26,4 +26,5 @@ public interface HitsujunScreenActivator {
 	public void activateResultScreen(boolean hasWon, int level, int score, float percentageAchieved);
 	public void showPopupScreen(HitsujunPopupScreen popupScreen);
 	public void hidePopupScreen();
+	public boolean isPopupScreen();
 }

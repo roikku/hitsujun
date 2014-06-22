@@ -30,6 +30,8 @@ import tripleplay.game.ScreenStack;
 import tripleplay.game.ScreenStack.Transition;
 import tripleplay.util.Logger;
 import playn.core.Game;
+import playn.core.Platform;
+import playn.core.PlayN;
 import playn.core.util.Clock;
 
 public class Hitsujun extends Game.Default implements HitsujunScreenActivator {
@@ -57,18 +59,54 @@ public class Hitsujun extends Game.Default implements HitsujunScreenActivator {
  
     
 	@Override
-	public void activateScreen(HitsujunScreen screen, Transition transition) {
+	public void activateScreen(final HitsujunScreen screen, final Transition transition) {
 		
 		Screen topScreen = screenStack.top() ;
-		while (topScreen != null && ((HitsujunScreen)topScreen).isPopup())
+		if (screen.equals(topScreen))
+			return ;
+		if (topScreen != null && ((HitsujunScreen)topScreen).isPopup())
 		{
-			screenStack.remove(topScreen) ;
-			topScreen = screenStack.top() ;
+			screenStack.remove(topScreen, new Transition (){
+
+				@Override
+				public void init(Screen oscreen, Screen nscreen) {
+				}
+
+				@Override
+				public boolean update(Screen oscreen, Screen nscreen, float elapsed) {
+					return false;
+				}
+
+				@Override
+				public void complete(Screen oscreen, Screen nscreen) {
+					Platform p = PlayN.platform();
+					if (p == null)
+						return ;
+					p.invokeLater(new Runnable() {
+						@Override
+						public void run() {
+							activateScreen(screen, transition);
+						}
+					});
+				}
+			});
 		}
 		screenStack.replace(screen, transition) ;
 	}
 	
-
+	
+	/*
+	@Override
+	public void activatePreviousScreen() {
+		if (screenStack.isTransiting())
+			return ;
+		Screen topScreen = screenStack.top() ;
+		if (topScreen == null)
+			return ;
+		screenStack.remove(topScreen, screenStack.slide()) ;
+	}*/
+	
+	
 	@Override
 	public void activateGameScreen(final int level) 
 	{
@@ -95,6 +133,13 @@ public class Hitsujun extends Game.Default implements HitsujunScreenActivator {
 	}
 	
 	
+	// useful to manage the back button on android
+	public boolean isMenuScreenActivated ()
+	{
+		return !screenStack.isTransiting() && menuScreen.equals(screenStack.top()) ;
+	}
+	
+	
 	@Override
 	public void activateMenuScreen() {
 		activateScreen (menuScreen, screenStack.slide()) ;
@@ -115,25 +160,22 @@ public class Hitsujun extends Game.Default implements HitsujunScreenActivator {
 
 	@Override
 	public void hidePopupScreen() {
-		
 		Screen screen = screenStack.top() ;
 		if (screen == null || !(screen instanceof HitsujunScreen) || !((HitsujunScreen)screen).isPopup())
 			throw new IllegalStateException () ;
 		screenStack.remove(screen, screenStack.slide()) ;
 	}
-	
-	
-	private void setViewSize ()
-	{
-		//PlayN.platformType().IOS ;
 		
+
+	@Override
+	public boolean isPopupScreen() {
+		Screen screen = screenStack.top() ;
+		return (screen != null && screen instanceof HitsujunScreen && ((HitsujunScreen)screen).isPopup()) ;
 	}
 	
 	
 	@Override
 	public void init() {
-		
-		setViewSize () ;
 		
 		final int size = Math.min(graphics().width(), graphics().height());
 		float xpos = graphics().width() / 2f; 

@@ -92,6 +92,7 @@ public class Hitsujun {
 		config.appName = "Hitsujun";
 		config.width = 800;
 		config.height = 600;
+		//config.scaleFactor = 1.5f ;
 
 		JavaPlatform.register(config);
 		

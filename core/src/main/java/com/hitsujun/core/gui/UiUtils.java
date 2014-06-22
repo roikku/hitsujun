@@ -4,6 +4,7 @@ import java.util.List;
 
 import playn.core.Font;
 import playn.core.PlayN;
+import tripleplay.ui.Button;
 import tripleplay.ui.Group;
 import tripleplay.ui.Label;
 import tripleplay.ui.Style;
@@ -15,9 +16,27 @@ public class UiUtils {
 	private UiUtils () { super () ; throw new UnsupportedOperationException () ; } 
 
 	
+	public static float scaleSize (float size)
+	{
+		return size ;//* graphics().scaleFactor() ;
+	}
+	
+	
+    private static Font buttonFont = PlayN.graphics().createFont("Helvetica", Font.Style.PLAIN, UiUtils.scaleSize (18));
+    private static Styles buttonStyle = Styles.make(Style.FONT.is(buttonFont));
+	
+    
+	public static Button getButton (String txt)
+	{
+		Button button = new Button(txt);
+		button.addStyles(buttonStyle) ;
+		return button ;
+	}
+	
+	
 	public static Label getEmptyLabel ()
 	{
-		return new Label(" ").setStyles(Styles.make(Style.FONT.is(PlayN.graphics().createFont("Helvetica", Font.Style.PLAIN, 10)))) ;
+		return new Label(" ").setStyles(Styles.make(Style.FONT.is(PlayN.graphics().createFont("Helvetica", Font.Style.PLAIN, UiUtils.scaleSize (10))))) ;
 	}
 	
 	

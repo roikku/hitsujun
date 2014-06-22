@@ -98,11 +98,12 @@ public class HitsujunGameScreen extends HitsujunScreen {
 	public void createMenu (final MenuCallback callback)
 	{
 		// http://threerings.github.io/tripleplay/apidocs/tripleplay/ui/layout/AbsoluteLayout.html
-		final int buttonWidth = 120 ;
-		final int buttonHeight = 30 ;
-		final int marginBottom = 20 ;
+		final int buttonWidth = (int) UiUtils.scaleSize (120) ;
+		final int buttonHeight = (int) UiUtils.scaleSize (30) ;
+		final int marginBottom = (int) UiUtils.scaleSize (20) ;
 		
-		Button buttonKanjiInfo = new Button("Kanji Info");
+		//Button buttonKanjiInfo = new Button("Kanji Info");
+		Button buttonKanjiInfo = UiUtils.getButton("Kanji Info");
 		buttonKanjiInfo.clicked().connect(new UnitSlot() {
 			@Override
 			public void onEmit() {
@@ -136,8 +137,8 @@ public class HitsujunGameScreen extends HitsujunScreen {
 	private void displayTextScore (String text)
 	{
 		float xpos = graphics().width() / 2f; 
-		float ypos = 15; 
-		Font font = graphics().createFont("Helvetica", Font.Style.PLAIN, 25);
+		float ypos = UiUtils.scaleSize (15); 
+		Font font = graphics().createFont("Helvetica", Font.Style.PLAIN, UiUtils.scaleSize (25));
 		TextFormat fmt = new TextFormat().withFont(font);
 		TextLayout layout = graphics().layoutText(text, fmt);
 		if (layerScore != null)
@@ -160,9 +161,9 @@ public class HitsujunGameScreen extends HitsujunScreen {
 			return ;
 		
 		float xpos = graphics().width() / 2f; 
-		float ypos = 50; 
+		float ypos = UiUtils.scaleSize (50) ; 
 		
-		Font font = graphics().createFont("Helvetica", Font.Style.PLAIN, 25);
+		Font font = graphics().createFont("Helvetica", Font.Style.PLAIN, UiUtils.scaleSize (25));
 		TextFormat fmt = new TextFormat().withFont(font);
 		TextLayout layout = graphics().layoutText(text, fmt);
 	

@@ -15,7 +15,6 @@
 package com.hitsujun.core.gui;
 
 import static playn.core.PlayN.graphics;
-
 import playn.core.Color;
 import playn.core.Font;
 import playn.core.PlayN;
@@ -67,17 +66,17 @@ public class HitsujunKanjiInfoPopupScreen extends HitsujunPopupScreen {
 				.inset(5)));
 		layer.add(root.layer);
 		
-        Font valueFont = PlayN.graphics().createFont("Helvetica", Font.Style.PLAIN, 24);
+        Font valueFont = PlayN.graphics().createFont("Helvetica", Font.Style.PLAIN, UiUtils.scaleSize (24));
         Styles valueStyles = Styles.make(Style.FONT.is(valueFont),
                                      Style.TEXT_EFFECT.is(Style.TextEffect.NONE), 
                                      Style.COLOR.is(Color.rgb(240, 10, 10)));
 
-        Font kanjiFont = PlayN.graphics().createFont("Helvetica", Font.Style.PLAIN, 64);
+        Font kanjiFont = PlayN.graphics().createFont("Helvetica", Font.Style.PLAIN, UiUtils.scaleSize (64));
         Styles kanjiStyle = Styles.make(Style.FONT.is(kanjiFont),
                 Style.TEXT_EFFECT.is(Style.TextEffect.GRADIENT), 
                 Style.COLOR.is(HitsujunColorConstants.FONT_TITLE_COLOR));
         
-        Font keyFont = PlayN.graphics().createFont("Helvetica", Font.Style.PLAIN, 20);
+        Font keyFont = PlayN.graphics().createFont("Helvetica", Font.Style.PLAIN, UiUtils.scaleSize (20));
         Styles keyStyle = Styles.make(Style.FONT.is(keyFont),
                 Style.TEXT_EFFECT.is(Style.TextEffect.NONE), 
                 Style.COLOR.is(Color.rgb(90, 90, 90)));
@@ -110,7 +109,8 @@ public class HitsujunKanjiInfoPopupScreen extends HitsujunPopupScreen {
 			root.add(new Label("There is no further information about this kanji").setStyles(keyStyle));
 		}
 		
-		Button button = new Button("Back");
+		//Button button = new Button("Back");
+		Button button = UiUtils.getButton("Back");
 		buttons.add(button);
 		button.clicked().connect(new UnitSlot() {
 			@Override

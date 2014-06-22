@@ -46,7 +46,16 @@ public class KanjiFactoryImpl implements KanjiFactory{
 
 	@Override
 	public void getKanji(String kanjiStr, int level, final Callback<Triplet<Kanji, KanjiView, KanjiController> > callback) {
-		final Kanji kanji = new Kanji.Builder (kanjiStr).setX(x).setY(y).setWidth(width).setHeight(height).build() ;
+		
+		float strokeWidth ;
+		float threshold ;
+		
+		strokeWidth = Math.min(12f, Math.min(width, height) / 50f) ; //* graphics().scaleFactor() ;
+		threshold = strokeWidth + 2f ;
+		
+		final Kanji kanji = new Kanji.Builder(kanjiStr).setX(x).setY(y)
+				.setWidth(width).setHeight(height).setStrokeWidth(strokeWidth)
+				.setThreshold(threshold).build();
 		KanjiStrokesLoader loader = new KanjiStrokesLoaderFromTxtImpl (level, kanjiStr) ;
 		kanji.init (loader, new Callback<Void> () {
 			@Override
