@@ -28,13 +28,21 @@ import com.hitsujun.core.util.svg.SvgUtils;
 
 public class Stroke 
 {
-	private final StrokePath strokePath = new StrokePath () ;
+	private final StrokePath strokePath ;
 
 	
 	public Stroke (String path, Transform tx, Transform ty)
 	{
 		super () ;
+		strokePath = new StrokePathImpl () ;
 		SvgUtils.stringToPath(this.strokePath, path, tx, ty) ;
+	}
+	
+	
+	public Stroke (StrokePath strokePath)
+	{
+		super () ;
+		this.strokePath = strokePath ;
 	}
 	
 	

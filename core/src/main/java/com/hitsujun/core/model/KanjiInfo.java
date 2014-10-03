@@ -44,6 +44,16 @@ public class KanjiInfo {
 	}
 	
 	
+	public KanjiInfo (String json, Json jsonService)
+	{
+		super () ;
+		if (json == null || jsonService == null)
+			throw new NullPointerException () ;
+		this.json = json ;
+		this.jsonObject = jsonService.parse(json) ;
+	}
+	
+	
 	public String getJson () {
 		return json ;
 	}

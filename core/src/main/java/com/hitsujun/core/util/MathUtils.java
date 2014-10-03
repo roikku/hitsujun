@@ -131,11 +131,20 @@ public class MathUtils {
 		float vx = v2.getFirst() ;
 		float vy = v2.getSecond() ;
 		
+		final float epsilon = Float.MIN_NORMAL ;
+		if (Math.abs(vxref) < epsilon && Math.abs(vyref) < epsilon 
+				|| Math.abs(vx) < epsilon && Math.abs(vy) < epsilon) {
+			throw new IllegalArgumentException ("The magnitude of the vectors cannot be zero") ;
+		}
 		double nref = (float) Math.sqrt(vxref * vxref + vyref * vyref) ;
 		double n = (float) Math.sqrt(vx * vx + vy * vy) ;
 		double dotP = vxref * vx + vyref * vy ;
-		double alpha = Math.acos(dotP / (nref * n)) ;
 		
+		double cos = dotP / (nref * n) ;
+		if (Math.abs(cos) > 1d) {
+			cos = Math.signum (cos) * 1d ;
+		}
+		double alpha = Math.acos(cos) ;
 		return (float) Math.abs(alpha) ;	
 	}
 }

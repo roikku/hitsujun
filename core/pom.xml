@@ -1,50 +1,113 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  <parent>
-    <groupId>com.hitsujun</groupId>
-    <artifactId>hitsujun</artifactId>
-    <version>1.2-SNAPSHOT</version>
-  </parent>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>com.hitsujun</groupId>
+		<artifactId>hitsujun</artifactId>
+		<version>1.2-SNAPSHOT</version>
+	</parent>
 
-  <artifactId>hitsujun-core</artifactId>
-  <packaging>jar</packaging>
-  <name>Hitsujun Core</name>
+	<artifactId>hitsujun-core</artifactId>
+	<packaging>jar</packaging>
+	<name>Hitsujun Core</name>
 
-  <dependencies>
-      
-    <dependency>
-      <groupId>com.googlecode.playn</groupId>
-      <artifactId>playn-core</artifactId>
-      <version>${playn.version}</version>
-    </dependency>
-    
-    <dependency>
-      <groupId>com.threerings</groupId>
-      <artifactId>tripleplay</artifactId>
-      <version>${playn.version}</version>
-    </dependency>
-        
-  </dependencies>
+	<properties>
+		<maven-eclipse-plugin.version>2.9</maven-eclipse-plugin.version>
+		<mockito.version>1.9.0</mockito.version>
+		<junit.version>4.10</junit.version>
+	</properties>
 
-  <build>
-    <plugins>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-source-plugin</artifactId>
-        <!-- build a -sources.jar always, rather than only on deploy -->
-        <executions>
-          <execution>
-            <id>attach-sources</id>
-            <phase>generate-resources</phase>
-            <goals>
-              <goal>jar-no-fork</goal>
-            </goals>
-          </execution>
-        </executions>
-      </plugin>
-    </plugins>
-  </build>
+	<dependencies>
+
+		<dependency>
+			<groupId>com.googlecode.playn</groupId>
+			<artifactId>playn-core</artifactId>
+			<version>${playn.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.threerings</groupId>
+			<artifactId>tripleplay</artifactId>
+			<version>${playn.version}</version>
+		</dependency>
+
+		<!-- Test Dependencies -->
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit-dep</artifactId>
+			<version>${junit.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.mockito</groupId>
+			<artifactId>mockito-core</artifactId>
+			<version>${mockito.version}</version>
+			<scope>test</scope>
+		</dependency>
+
+		<!-- http://stackoverflow.com/questions/10467667/with-playn-framework-how-can-i-include-unit-tests-in-my-project -->
+		<dependency>
+			<groupId>com.googlecode.playn</groupId>
+			<artifactId>playn-java</artifactId>
+			<version>${playn.version}</version>
+			<scope>test</scope>
+		</dependency>
+
+	</dependencies>
+
+	<build>
+		<plugins>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-eclipse-plugin</artifactId>
+				<version>${maven-eclipse-plugin.version}</version>
+				<configuration>
+					<downloadSources>true</downloadSources>
+					<downloadJavadocs>true</downloadJavadocs>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-source-plugin</artifactId>
+				<!-- build a -sources.jar always, rather than only on deploy -->
+				<executions>
+					<execution>
+						<id>attach-sources</id>
+						<phase>generate-resources</phase>
+						<goals>
+							<goal>jar-no-fork</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+
+			<!-- http://stackoverflow.com/questions/10467667/with-playn-framework-how-can-i-include-unit-tests-in-my-project -->
+			<plugin>
+				<groupId>com.googlecode.mavennatives</groupId>
+				<artifactId>maven-nativedependencies-plugin</artifactId>
+				<version>0.0.6</version>
+				<executions>
+					<execution>
+						<id>unpacknatives</id>
+						<phase>generate-resources</phase>
+						<goals>
+							<goal>copy</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>2.12</version>
+				<configuration>
+					<argLine>-Djava.library.path=${basedir}/target/natives</argLine>
+				</configuration>
+			</plugin>
+
+		</plugins>
+	</build>
 </project>
