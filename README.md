@@ -1,4 +1,4 @@
-Hitsujun [![Build Status](https://roikku.ci.cloudbees.com/buildStatus/icon?job=drive-uploader)](https://roikku.ci.cloudbees.com/job/drive-uploader/)
+Hitsujun [![Build Status](https://buildhive.cloudbees.com/job/roikku/job/hitsujun/badge/icon)](https://buildhive.cloudbees.com/job/roikku/job/hitsujun/)
 ========
 
 Educative game intended for Japanese kanji learners. Please, visit [www.hitsujun.org](http://www.hitsujun.org) for further details.
